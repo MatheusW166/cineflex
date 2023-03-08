@@ -1,7 +1,6 @@
 import MoviesList from "../../components/MoviesList";
-import { PageTitle } from "../../styled";
+import { PageTitle, PageContainer } from "../../styled";
 import { useMoviesApi } from "../../hooks/useMoviesApi";
-import { MoviesContainer } from "./styled";
 
 const ROUTE_MOVIES = "/";
 export { ROUTE_MOVIES };
@@ -18,9 +17,9 @@ export default function Movies() {
   }
 
   return (
-    <MoviesContainer>
+    <PageContainer>
       <PageTitle>Selecione o filme</PageTitle>
       <MoviesList movies={movies} />
-    </MoviesContainer>
+    </PageContainer>
   );
 }

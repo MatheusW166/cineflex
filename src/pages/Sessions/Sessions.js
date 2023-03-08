@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
-import { SessionsContainer } from "./styled";
-import { PageTitle } from "../../styled";
+import { PageTitle, PageContainer } from "../../styled";
 import MovieInformation from "../../components/MovieInformation";
 import { useMovieSessionsApi } from "../../hooks/useMoviesApi";
 import SessionsList from "../../components/SessionsList";
@@ -23,10 +22,10 @@ export default function Sessions() {
   const { title, posterURL, days } = sessions;
 
   return (
-    <SessionsContainer>
+    <PageContainer>
       <PageTitle>Selecione o horário</PageTitle>
       <SessionsList sessions={days} />
       <MovieInformation id={id} title={title} posterURL={posterURL} />
-    </SessionsContainer>
+    </PageContainer>
   );
 }

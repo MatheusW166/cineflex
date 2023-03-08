@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-const headerHight = "67px";
+const headerHeight = "67px";
 
 const Header = styled.header`
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
-  height: ${headerHight};
+  height: ${headerHeight};
   display: grid;
   place-content: center;
   background: ${({ theme }) => theme.overBg};
@@ -19,7 +19,7 @@ const Header = styled.header`
 `;
 
 const AppContainer = styled.div`
-  margin-top: ${headerHight};
+  margin-top: ${headerHeight};
   padding: 0 24px 24px 24px;
 `;
 
@@ -32,4 +32,9 @@ const PageTitle = styled.h2`
   margin: 56px 0;
 `;
 
-export { Header, AppContainer, PageTitle };
+const PageContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+`;
+
+export { Header, AppContainer, PageTitle, PageContainer };
