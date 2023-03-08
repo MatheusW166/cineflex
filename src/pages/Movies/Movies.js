@@ -1,3 +1,3 @@
-export default function Movies(props) {
+export default function Movies() {
   return <>Movies</>;
 }
