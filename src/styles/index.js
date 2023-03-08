@@ -1,4 +1,4 @@
-import GlobalStyle from "./globalStyle";
 import ResetStyle from "./resetStyle";
+import GlobalStyle from "./globalStyle";
 
-export { GlobalStyle, ResetStyle };
+export { ResetStyle, GlobalStyle };

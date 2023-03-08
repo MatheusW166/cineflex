@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         font-family: "Roboto", sans-serif;
+        color: ${({ theme }) => theme.textPrimary};
     }
     h1 {
         color: ${({ theme }) => theme.accent};
