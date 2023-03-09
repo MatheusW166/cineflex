@@ -12,6 +12,7 @@ const OrderInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin: 0 auto;
   h3 {
     margin-bottom: 8px;
     font-size: ${({ theme }) => theme.lg};
