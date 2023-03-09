@@ -9,7 +9,7 @@ export { ROUTE_SESSIONS };
 
 export default function Sessions() {
   const { id } = useParams();
-  const { sessions, loading, error } = useMovieSessionsApi(id);
+  const [sessions, loading, error] = useMovieSessionsApi(id);
 
   if (error) {
     return `${error}`;

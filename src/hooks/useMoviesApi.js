@@ -14,7 +14,7 @@ function useMoviesApi() {
       .finally(() => setLoading(false));
   }, []);
 
-  return { movies, loading, error };
+  return [movies, loading, error];
 }
 
 function useMovieSessionsApi(movieId) {
@@ -30,7 +30,7 @@ function useMovieSessionsApi(movieId) {
       .finally(() => setLoading(false));
   }, [movieId]);
 
-  return { sessions, loading, error };
+  return [sessions, loading, error];
 }
 
 function useMovieSessionSeatsApi(sessionId) {
@@ -46,23 +46,24 @@ function useMovieSessionSeatsApi(sessionId) {
       .finally(() => setLoading(false));
   }, [sessionId]);
 
-  return { seats, loading, error };
+  return [seats, loading, error];
 }
 
-function useMovieReserveSeatsApi(reservation) {
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(true);
+function useMovieReserveSeatsApi() {
+  const [response, setResponse] = useState();
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
-  const apiCall = () => {
+  const apiCall = (reservation) => {
+    setLoading(true);
     moviesApiAdapter
       .reserveSeats(reservation)
-      .then(setData)
+      .then(setResponse)
       .catch(setError)
       .finally(() => setLoading(false));
   };
 
-  return { data, loading, error, apiCall };
+  return [response, loading, error, apiCall];
 }
 
 export {

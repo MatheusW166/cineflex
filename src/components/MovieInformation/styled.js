@@ -12,6 +12,8 @@ const MovieInformationContainer = styled.div`
   bottom: 0;
   left: 0;
 
+  max-height: 118px;
+
   .movie-card {
     width: 64px;
   }

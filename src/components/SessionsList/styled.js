@@ -4,6 +4,8 @@ const SessionsListUl = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 64px 24px;
+  margin-top: 16px;
+  margin-bottom: 118px;
 `;
 
 const SessionItemLi = styled.li`
@@ -22,25 +24,4 @@ const SessionShowtimesList = styled.ul`
   gap: 8px;
 `;
 
-const SessionShowtimeItem = styled.li`
-  a {
-    letter-spacing: 0.02em;
-    line-height: 21px;
-    text-decoration: none;
-    font-size: ${({ theme }) => theme.md};
-    color: ${({ theme }) => theme.bg};
-    background: ${({ theme }) => theme.accent};
-    display: grid;
-    place-content: center;
-    border-radius: 3px;
-    width: 82px;
-    height: 43px;
-  }
-`;
-
-export {
-  SessionItemLi,
-  SessionShowtimeItem,
-  SessionShowtimesList,
-  SessionsListUl,
-};
+export { SessionItemLi, SessionShowtimesList, SessionsListUl };

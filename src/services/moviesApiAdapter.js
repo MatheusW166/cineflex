@@ -17,7 +17,7 @@ const moviesApiAdapter = {
   },
   reserveSeats: async (reservation) => {
     const res = await axios.post(`${BASE_URL}/seats/book-many`, reservation);
-    return res.data;
+    return res;
   },
 };
 

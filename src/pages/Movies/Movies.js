@@ -6,7 +6,7 @@ const ROUTE_MOVIES = "/";
 export { ROUTE_MOVIES };
 
 export default function Movies() {
-  const { movies, loading, error } = useMoviesApi();
+  const [movies, loading, error] = useMoviesApi();
 
   if (error) {
     return `${error}`;
