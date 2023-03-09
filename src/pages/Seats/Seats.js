@@ -66,6 +66,7 @@ export default function Seats() {
     reserveSeats(reservation);
     navigator("/sucesso", {
       state: {
+        seats: selectedSeats,
         reservation,
         movie,
         day,
