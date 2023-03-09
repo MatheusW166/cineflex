@@ -1,4 +1,3 @@
-import Movies, { ROUTE_MOVIES } from "./Movies";
+import Movies from "./Movies";
 
-export { ROUTE_MOVIES };
 export default Movies;

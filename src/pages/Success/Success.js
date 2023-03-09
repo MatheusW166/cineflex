@@ -1,6 +1,7 @@
 import { PageContainer, PageTitle, PrimaryButton } from "../../styled";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { ROUTES } from "../../routes";
 
 const SuccessMessage = styled(PageTitle)`
   font-weight: 700;
@@ -64,7 +65,7 @@ export default function Success() {
           <p>CPF: {cpf}</p>
         </div>
       </OrderInfo>
-      <Link to="/">
+      <Link to={ROUTES.home}>
         <PrimaryButtonAlt>Voltar pra Home</PrimaryButtonAlt>
       </Link>
     </PageContainer>

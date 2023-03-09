@@ -4,13 +4,20 @@ import Sessions from "./pages/Sessions";
 import Seats from "./pages/Seats";
 import Success from "./pages/Success";
 
+export const ROUTES = {
+  home: "/",
+  seats: "/assentos",
+  sessions: "/sessoes",
+  success: "/sucesso",
+};
+
 export default function MyRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Movies />} />
-      <Route path="/sessoes/:id" element={<Sessions />} />
-      <Route path="/assentos/:id" element={<Seats />} />
-      <Route path="/sucesso" element={<Success />} />
+      <Route path={ROUTES.home} element={<Movies />} />
+      <Route path={`${ROUTES.sessions}/:id`} element={<Sessions />} />
+      <Route path={`${ROUTES.seats}/:id`} element={<Seats />} />
+      <Route path={ROUTES.success} element={<Success />} />
     </Routes>
   );
 }

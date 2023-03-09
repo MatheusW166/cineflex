@@ -1,4 +1,3 @@
-import Seats, { ROUTE_SEATS } from "./Seats";
+import Seats from "./Seats";
 
-export { ROUTE_SEATS };
 export default Seats;

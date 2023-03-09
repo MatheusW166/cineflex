@@ -4,9 +4,6 @@ import MovieInformation from "../../components/MovieInformation";
 import { useMovieSessionsApi } from "../../hooks/useMoviesApi";
 import SessionsList from "../../components/SessionsList";
 
-const ROUTE_SESSIONS = "/sessoes";
-export { ROUTE_SESSIONS };
-
 export default function Sessions() {
   const { id } = useParams();
   const [sessions, loading, error] = useMovieSessionsApi(id);

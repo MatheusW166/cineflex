@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { ROUTE_SESSIONS } from "../../pages/Sessions";
+import { ROUTES } from "../../routes";
 import { MovieCardContainer, MovieImage } from "./styled";
 
 export default function MovieCard({ id, title, posterURL }) {
   return (
     <MovieCardContainer className="movie-card">
-      <Link to={`${ROUTE_SESSIONS}/${id}`}>
+      <Link to={`${ROUTES.sessions}/${id}`}>
         <MovieImage src={posterURL} alt={title} />
       </Link>
     </MovieCardContainer>

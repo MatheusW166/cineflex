@@ -2,9 +2,6 @@ import MoviesList from "../../components/MoviesList";
 import { PageTitle, PageContainer } from "../../styled";
 import { useMoviesApi } from "../../hooks/useMoviesApi";
 
-const ROUTE_MOVIES = "/";
-export { ROUTE_MOVIES };
-
 export default function Movies() {
   const [movies, loading, error] = useMoviesApi();
 

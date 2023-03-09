@@ -14,9 +14,7 @@ import {
 import MovieInformation from "../../components/MovieInformation";
 import { useState } from "react";
 import SeatsList, { SeatsCaption } from "../../components/SeatsList";
-
-const ROUTE_SEATS = "/assentos";
-export { ROUTE_SEATS };
+import { ROUTES } from "../../routes";
 
 export default function Seats() {
   const { id } = useParams();
@@ -64,7 +62,7 @@ export default function Seats() {
     const ids = selectedSeats.map((seat) => seat.id);
     const reservation = { ids, clientName, cpf };
     reserveSeats(reservation);
-    navigator("/sucesso", {
+    navigator(ROUTES.success, {
       state: {
         seats: selectedSeats,
         reservation,

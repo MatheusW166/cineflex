@@ -1,4 +1,3 @@
-import Sessions, { ROUTE_SESSIONS } from "./Sessions";
+import Sessions from "./Sessions";
 
-export { ROUTE_SESSIONS };
 export default Sessions;
