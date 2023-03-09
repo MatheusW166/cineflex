@@ -91,6 +91,7 @@ export default function Seats() {
             placeholder="Digite seu nome..."
             name="name"
             type="text"
+            data-test="client-name"
           />
         </label>
         <label>
@@ -100,9 +101,12 @@ export default function Seats() {
             placeholder="Digite seu CPF..."
             name="cpf"
             type="text"
+            data-test="client-cpf"
           />
         </label>
-        <PrimaryButton type="submit">Reservar assento(s)</PrimaryButton>
+        <PrimaryButton data-test="book-seat-btn" type="submit">
+          Reservar assento(s)
+        </PrimaryButton>
       </CustomForm>
 
       <MovieInformation

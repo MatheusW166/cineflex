@@ -5,7 +5,7 @@ import { PrimaryButton } from "../../styled";
 
 export default function SessionItem({ date, weekday, showtimes }) {
   return (
-    <SessionItemLi>
+    <SessionItemLi data-test="movie-day">
       <p>
         {weekday} - {date}
       </p>
@@ -13,7 +13,9 @@ export default function SessionItem({ date, weekday, showtimes }) {
         {showtimes.map(({ id, name }) => (
           <li key={id}>
             <PrimaryButton>
-              <Link to={`${ROUTES.seats}/${id}`}>{name}</Link>
+              <Link data-test="showtime" to={`${ROUTES.seats}/${id}`}>
+                {name}
+              </Link>
             </PrimaryButton>
           </li>
         ))}

@@ -9,7 +9,7 @@ export default function MovieInformation({
   time,
 }) {
   return (
-    <MovieInformationContainer>
+    <MovieInformationContainer data-test="footer">
       <MovieCard {...{ id, title, posterURL }} />
       <div>
         <p>{title}</p>

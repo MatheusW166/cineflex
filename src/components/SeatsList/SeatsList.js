@@ -6,6 +6,7 @@ export default function SeatsList({ seats, selectedSeats, onSeatClick }) {
       {seats.seats.map((seat) => (
         <li key={seat.id}>
           <Seat
+            data-test="seat"
             onClick={() => onSeatClick(seat)}
             isSelected={selectedSeats.includes(seat)}
             isAvailable={seat.isAvailable}>

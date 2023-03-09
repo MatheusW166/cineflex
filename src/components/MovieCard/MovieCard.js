@@ -4,7 +4,7 @@ import { MovieCardContainer, MovieImage } from "./styled";
 
 export default function MovieCard({ id, title, posterURL }) {
   return (
-    <MovieCardContainer className="movie-card">
+    <MovieCardContainer data-test="movie" className="movie-card">
       <Link to={`${ROUTES.sessions}/${id}`}>
         <MovieImage src={posterURL} alt={title} />
       </Link>

@@ -47,26 +47,26 @@ export default function Success() {
         com sucesso!
       </SuccessMessage>
       <OrderInfo>
-        <div>
+        <div data-test="movie-info">
           <h3>Filme e sessão</h3>
           <p>{title}</p>
           <p>
             {date} {time}
           </p>
         </div>
-        <div>
+        <div data-test="seats-info">
           <h3>Ingressos</h3>
           {seats.map((seat) => (
             <p key={seat.id}>Assento {seat.name}</p>
           ))}
         </div>
-        <div>
+        <div data-test="client-info">
           <h3>Comprador</h3>
           <p>Nome: {clientName}</p>
           <p>CPF: {cpf}</p>
         </div>
       </OrderInfo>
-      <Link to={ROUTES.home}>
+      <Link data-test="go-home-btn" to={ROUTES.home}>
         <PrimaryButtonAlt>Voltar pra Home</PrimaryButtonAlt>
       </Link>
     </PageContainer>
