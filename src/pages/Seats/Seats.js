@@ -4,27 +4,20 @@ import {
   useMovieSessionSeatsApi,
   useMovieReserveSeatsApi,
 } from "../../hooks/useMoviesApi";
-import {
-  PageContainer,
-  PageTitle,
-  CustomInput,
-  PrimaryButton,
-  CustomForm,
-} from "../../styled";
+import { PageContainer, PageTitle } from "../../styled";
 import MovieInformation from "../../components/MovieInformation";
 import { useState } from "react";
 import SeatsList, { SeatsCaption } from "../../components/SeatsList";
 import { ROUTES } from "../../routes";
-import moviesApiAdapter from "../../services/moviesApiAdapter";
+import ReserveSeatsForm from "../../components/ReserveSeatsForm";
 
 export default function Seats() {
   const { id } = useParams();
   const navigator = useNavigate();
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [seats, loadingSeats, errorSeats] = useMovieSessionSeatsApi(id);
-  // const [_, loadingReserve, errorReserve, reserveSeats] =
-  //   useMovieReserveSeatsApi();
-
+  const [_, loadingReserve, errorReserve, reserveSeats] =
+    useMovieReserveSeatsApi();
   const [clientName, setClientName] = useState("");
   const [cpf, setCpf] = useState("");
 
@@ -36,15 +29,13 @@ export default function Seats() {
     return "Loading...";
   }
 
-  // if (errorReserve) {
-  //   return `${errorReserve}`;
-  // }
+  if (errorReserve) {
+    return `${errorReserve}`;
+  }
 
-  // if (loadingReserve) {
-  //   return "Reserving seats...";
-  // }
-
-  const { movie, name, day } = seats;
+  if (loadingReserve) {
+    return "Reserving seats...";
+  }
 
   function handleSeatClick(seat) {
     if (!seat.isAvailable) {
@@ -59,20 +50,20 @@ export default function Seats() {
     setSelectedSeats([...selectedSeats, seat]);
   }
 
-  function validateForm(name, cpf) {
-    return name.length > 0 && /[\d]+/g.test(cpf);
+  function validateForm(selectedSeats, name, cpf) {
+    return selectedSeats.length > 0 && name.length > 0 && /[\d]+/g.test(cpf);
   }
 
-  function handleFormSubmit(event) {
-    event.preventDefault();
+  const { movie, name, day } = seats;
 
-    if (!validateForm(clientName, cpf)) {
+  function handleFormSubmit() {
+    if (!validateForm(selectedSeats, clientName, cpf)) {
       return;
     }
-
     const ids = selectedSeats.map((seat) => seat.id);
-    const reservation = { ids, clientName, cpf };
-    moviesApiAdapter.reserveSeats(reservation).then((_) => {
+    const reservation = { ids, name: clientName, cpf };
+    reserveSeats(
+      reservation,
       navigator(ROUTES.success, {
         state: {
           seats: selectedSeats,
@@ -81,8 +72,8 @@ export default function Seats() {
           day,
           time: name,
         },
-      });
-    });
+      })
+    );
   }
 
   return (
@@ -94,35 +85,13 @@ export default function Seats() {
         onSeatClick={handleSeatClick}
       />
       <SeatsCaption />
-
-      <CustomForm onSubmit={handleFormSubmit}>
-        <label>
-          Nome do comprador:
-          <CustomInput
-            placeholder="Digite seu nome..."
-            name="name"
-            type="text"
-            data-test="client-name"
-            value={clientName}
-            onChange={(e) => setClientName(e.target.value)}
-          />
-        </label>
-        <label>
-          CPF do comprador:
-          <CustomInput
-            placeholder="Digite seu CPF..."
-            name="cpf"
-            type="text"
-            data-test="client-cpf"
-            value={cpf}
-            onChange={(e) => setCpf(e.target.value)}
-          />
-        </label>
-        <PrimaryButton data-test="book-seat-btn" type="submit">
-          Reservar assento(s)
-        </PrimaryButton>
-      </CustomForm>
-
+      <ReserveSeatsForm
+        handleFormSubmit={handleFormSubmit}
+        valueName={clientName}
+        valueCpf={cpf}
+        onChangeName={setClientName}
+        onChangeCpf={setCpf}
+      />
       <MovieInformation
         id={movie.id}
         title={movie.title}
