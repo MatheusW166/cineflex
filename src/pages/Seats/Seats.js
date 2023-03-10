@@ -15,14 +15,15 @@ import MovieInformation from "../../components/MovieInformation";
 import { useState } from "react";
 import SeatsList, { SeatsCaption } from "../../components/SeatsList";
 import { ROUTES } from "../../routes";
+import moviesApiAdapter from "../../services/moviesApiAdapter";
 
 export default function Seats() {
   const { id } = useParams();
   const navigator = useNavigate();
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [seats, loadingSeats, errorSeats] = useMovieSessionSeatsApi(id);
-  const [_, loadingReserve, errorReserve, reserveSeats] =
-    useMovieReserveSeatsApi();
+  // const [_, loadingReserve, errorReserve, reserveSeats] =
+  //   useMovieReserveSeatsApi();
 
   const [clientName, setClientName] = useState("");
   const [cpf, setCpf] = useState("");
@@ -35,13 +36,13 @@ export default function Seats() {
     return "Loading...";
   }
 
-  if (errorReserve) {
-    return `${errorReserve}`;
-  }
+  // if (errorReserve) {
+  //   return `${errorReserve}`;
+  // }
 
-  if (loadingReserve) {
-    return "Reserving seats...";
-  }
+  // if (loadingReserve) {
+  //   return "Reserving seats...";
+  // }
 
   const { movie, name, day } = seats;
 
@@ -71,7 +72,7 @@ export default function Seats() {
 
     const ids = selectedSeats.map((seat) => seat.id);
     const reservation = { ids, clientName, cpf };
-    reserveSeats(reservation, () => {
+    moviesApiAdapter.reserveSeats(reservation).then((_) => {
       navigator(ROUTES.success, {
         state: {
           seats: selectedSeats,
