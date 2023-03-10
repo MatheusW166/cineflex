@@ -24,6 +24,9 @@ export default function Seats() {
   const [_, loadingReserve, errorReserve, reserveSeats] =
     useMovieReserveSeatsApi();
 
+  const [clientName, setClientName] = useState("");
+  const [cpf, setCpf] = useState("");
+
   if (errorSeats) {
     return `${errorSeats}`;
   }
@@ -44,6 +47,7 @@ export default function Seats() {
 
   function handleSeatClick(seat) {
     if (!seat.isAvailable) {
+      alert("Assento indisponível.");
       return;
     }
     if (selectedSeats.includes(seat)) {
@@ -60,12 +64,8 @@ export default function Seats() {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    const form = event.target;
-    const clientName = form["name"].value;
-    const cpf = form["cpf"].value;
 
     if (!validateForm(clientName, cpf)) {
-      console.log("recusado");
       return;
     }
 
@@ -101,6 +101,8 @@ export default function Seats() {
             name="name"
             type="text"
             data-test="client-name"
+            value={clientName}
+            onChange={(e) => setClientName(e.target.value)}
           />
         </label>
         <label>
@@ -110,6 +112,8 @@ export default function Seats() {
             name="cpf"
             type="text"
             data-test="client-cpf"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
           />
         </label>
         <PrimaryButton data-test="book-seat-btn" type="submit">
