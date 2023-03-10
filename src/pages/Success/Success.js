@@ -35,7 +35,7 @@ export default function Success() {
     seats,
     movie: { title },
     day: { date },
-    reservation: { clientName, cpf },
+    reservation: { name, cpf },
     time,
   } = state;
 
@@ -62,7 +62,7 @@ export default function Success() {
         </div>
         <div data-test="client-info">
           <h3>Comprador</h3>
-          <p>Nome: {clientName}</p>
+          <p>Nome: {name}</p>
           <p>CPF: {cpf}</p>
         </div>
       </OrderInfo>

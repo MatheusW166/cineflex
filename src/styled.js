@@ -8,13 +8,18 @@ const Header = styled.header`
   top: 0;
   left: 0;
   height: ${headerHeight};
-  display: grid;
-  place-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: ${({ theme }) => theme.overBg};
   h1 {
     font-size: ${({ theme }) => theme.xxl};
     color: ${({ theme }) => theme.accent};
     font-weight: 400;
+  }
+  button {
+    position: absolute;
+    left: 24px;
   }
 `;
 

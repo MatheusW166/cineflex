@@ -1,7 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { ResetStyle, GlobalStyle } from "./styles";
-import { Header, AppContainer } from "./styled";
+import { AppContainer } from "./styled";
 import MyRoutes from "./routes";
 import THEME from "./theme";
 
@@ -11,9 +11,6 @@ function App() {
       <ThemeProvider theme={THEME}>
         <ResetStyle />
         <GlobalStyle />
-        <Header>
-          <h1>CINEFLEX</h1>
-        </Header>
         <AppContainer>
           <MyRoutes />
         </AppContainer>
