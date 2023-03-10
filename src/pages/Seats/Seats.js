@@ -54,11 +54,21 @@ export default function Seats() {
     setSelectedSeats([...selectedSeats, seat]);
   }
 
+  function validateForm(name, cpf) {
+    return name.length > 0 && /[\d]+/g.test(cpf);
+  }
+
   function handleFormSubmit(event) {
     event.preventDefault();
     const form = event.target;
     const clientName = form["name"].value;
     const cpf = form["cpf"].value;
+
+    if (!validateForm(clientName, cpf)) {
+      console.log("recusado");
+      return;
+    }
+
     const ids = selectedSeats.map((seat) => seat.id);
     const reservation = { ids, clientName, cpf };
     reserveSeats(reservation);
@@ -87,7 +97,6 @@ export default function Seats() {
         <label>
           Nome do comprador:
           <CustomInput
-            required
             placeholder="Digite seu nome..."
             name="name"
             type="text"
@@ -97,7 +106,6 @@ export default function Seats() {
         <label>
           CPF do comprador:
           <CustomInput
-            required
             placeholder="Digite seu CPF..."
             name="cpf"
             type="text"
