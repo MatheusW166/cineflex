@@ -81,7 +81,7 @@ const CustomForm = styled.form`
   max-width: 500px;
   margin: 0 auto;
   margin-top: 48px;
-  gap: 8px;
+  gap: 32px;
   font-size: ${({ theme }) => theme.md};
   margin-bottom: 118px;
   input {
@@ -90,6 +90,11 @@ const CustomForm = styled.form`
   button {
     margin: 0 auto;
     margin-top: 48px;
+  }
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 `;
 

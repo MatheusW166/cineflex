@@ -3,10 +3,9 @@ import InputGroup from "../InputGroup";
 
 export default function ReserveSeatsForm({
   handleFormSubmit,
-  valueCpf,
-  valueName,
-  onChangeName,
+  forms,
   onChangeCpf,
+  onChangeName,
 }) {
   function onSubmit(e) {
     e.preventDefault();
@@ -15,24 +14,28 @@ export default function ReserveSeatsForm({
 
   return (
     <CustomForm onSubmit={onSubmit}>
-      <InputGroup
-        title="Nome do comprador: "
-        placeholder="Digite seu nome..."
-        name="name"
-        type="text"
-        dataTest="client-name"
-        value={valueName}
-        onChange={onChangeName}
-      />
-      <InputGroup
-        title="CPF do comprador:"
-        placeholder="Digite seu CPF..."
-        name="cpf"
-        type="text"
-        dataTest="client-cpf"
-        value={valueCpf}
-        onChange={onChangeCpf}
-      />
+      {Object.values(forms).map((form) => (
+        <div key={form.seat.id}>
+          <InputGroup
+            title={`Nome do comprador ${form.seat.name}`}
+            placeholder="Digite seu nome..."
+            name="name"
+            type="text"
+            dataTest="client-name"
+            value={form.name}
+            onChange={(e) => onChangeName(e.target.value, form.seat.id)}
+          />
+          <InputGroup
+            title={`CPF do comprador ${form.seat.name}`}
+            placeholder="Digite seu CPF..."
+            name="cpf"
+            type="text"
+            dataTest="client-cpf"
+            value={form.cpf}
+            onChange={(e) => onChangeCpf(e.target.value, form.seat.id)}
+          />
+        </div>
+      ))}
       <PrimaryButton data-test="book-seat-btn" type="submit">
         Reservar assento(s)
       </PrimaryButton>

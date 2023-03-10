@@ -22,6 +22,11 @@ const OrderInfo = styled.div`
     letter-spacing: 0.04em;
     font-size: ${({ theme }) => theme.md};
   }
+  .client-info {
+    & > div:not(:last-child) {
+      margin-bottom: 8px;
+    }
+  }
 `;
 
 const PrimaryButtonAlt = styled(PrimaryButton)`
@@ -33,10 +38,10 @@ export default function Success() {
   const { state } = useLocation();
   const {
     seats,
+    reservation,
+    time,
     movie: { title },
     day: { date },
-    reservation: { name, cpf },
-    time,
   } = state;
 
   return (
@@ -60,10 +65,14 @@ export default function Success() {
             <p key={seat.id}>Assento {seat.name}</p>
           ))}
         </div>
-        <div data-test="client-info">
-          <h3>Comprador</h3>
-          <p>Nome: {name}</p>
-          <p>CPF: {cpf}</p>
+        <div className="client-info" data-test="client-info">
+          <h3>Compradores</h3>
+          {reservation.compradores.map((c) => (
+            <div key={c.cpf}>
+              <p>Nome: {c.nome}</p>
+              <p>CPF: {c.cpf}</p>
+            </div>
+          ))}
         </div>
       </OrderInfo>
       <Link data-test="go-home-btn" to={ROUTES.home}>

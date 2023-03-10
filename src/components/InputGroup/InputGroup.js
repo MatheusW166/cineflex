@@ -19,7 +19,7 @@ export default function InputGroup({
         type={type}
         data-test={dataTest}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={onChange}
         {...props}
       />
     </label>

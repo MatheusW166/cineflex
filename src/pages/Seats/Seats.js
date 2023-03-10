@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -18,8 +19,7 @@ export default function Seats() {
   const [seats, loadingSeats, errorSeats] = useMovieSessionSeatsApi(id);
   const [_, loadingReserve, errorReserve, reserveSeats] =
     useMovieReserveSeatsApi();
-  const [clientName, setClientName] = useState("");
-  const [cpf, setCpf] = useState("");
+  const [forms, setForms] = useState({});
 
   if (errorSeats) {
     return `${errorSeats}`;
@@ -37,31 +37,85 @@ export default function Seats() {
     return "Reserving seats...";
   }
 
+  function updateForm(id, newForm) {
+    setForms({
+      ...forms,
+      [id]: newForm,
+    });
+  }
+
+  function addForm(seat) {
+    const { id } = seat;
+    const newForm = {
+      seat,
+      name: "",
+      cpf: "",
+    };
+    updateForm(id, newForm);
+  }
+
+  function removeForm(id) {
+    const newForm = { ...forms };
+    delete newForm[id];
+    setForms(newForm);
+  }
+
+  function onChangeCpf(value, formId) {
+    const formObj = forms[formId];
+    formObj.cpf = value;
+    updateForm(formId, formObj);
+  }
+
+  function onChangeName(value, formId) {
+    const formObj = forms[formId];
+    formObj.name = value;
+    updateForm(formId, formObj);
+  }
+
+  function confirmSeatRemoval() {
+    return confirm("Deseja remover o assento?");
+  }
+
   function handleSeatClick(seat) {
     if (!seat.isAvailable) {
       alert("Assento indisponível.");
       return;
     }
-    if (selectedSeats.includes(seat)) {
-      const newSeats = selectedSeats.filter((s) => s !== seat);
-      setSelectedSeats(newSeats);
+    if (!selectedSeats.includes(seat)) {
+      setSelectedSeats([...selectedSeats, seat]);
+      addForm(seat);
       return;
     }
-    setSelectedSeats([...selectedSeats, seat]);
+    if (!confirmSeatRemoval()) {
+      return;
+    }
+    const newSeats = selectedSeats.filter((s) => s !== seat);
+    setSelectedSeats(newSeats);
+    removeForm(seat.id);
   }
 
-  function validateForm(selectedSeats, name, cpf) {
-    return selectedSeats.length > 0 && name.length > 0 && /[\d]+/g.test(cpf);
+  function validateForm() {
+    const invalidForms = Object.values(forms).filter((f) => {
+      return f.name.length === 0 || !/[\d]+/g.test(f.cpf);
+    });
+    return selectedSeats.length > 0 && invalidForms.length === 0;
+  }
+
+  function getCompradores() {
+    return Object.values(forms).map((f) => {
+      return { idAssento: f.seat.id, nome: f.name, cpf: f.cpf };
+    });
   }
 
   const { movie, name, day } = seats;
 
   function handleFormSubmit() {
-    if (!validateForm(selectedSeats, clientName, cpf)) {
+    if (!validateForm()) {
       return;
     }
     const ids = selectedSeats.map((seat) => seat.id);
-    const reservation = { ids, name: clientName, cpf };
+    const compradores = getCompradores();
+    const reservation = { ids, compradores };
     reserveSeats(
       reservation,
       navigator(ROUTES.success, {
@@ -87,10 +141,9 @@ export default function Seats() {
       <SeatsCaption />
       <ReserveSeatsForm
         handleFormSubmit={handleFormSubmit}
-        valueName={clientName}
-        valueCpf={cpf}
-        onChangeName={setClientName}
-        onChangeCpf={setCpf}
+        forms={forms}
+        onChangeCpf={onChangeCpf}
+        onChangeName={onChangeName}
       />
       <MovieInformation
         id={movie.id}
