@@ -72,8 +72,12 @@ export default function Seats() {
     updateForm(formId, formObj);
   }
 
-  function confirmSeatRemoval() {
-    return confirm("Deseja remover o assento?");
+  function confirmSeatRemoval(id) {
+    const { name, cpf } = forms[id];
+    if (name.length > 0 || cpf.length > 0) {
+      return confirm("Deseja remover o assento?");
+    }
+    return true;
   }
 
   function handleSeatClick(seat) {
@@ -86,7 +90,7 @@ export default function Seats() {
       addForm(seat);
       return;
     }
-    if (!confirmSeatRemoval()) {
+    if (!confirmSeatRemoval(seat.id)) {
       return;
     }
     const newSeats = selectedSeats.filter((s) => s !== seat);
