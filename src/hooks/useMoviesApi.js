@@ -54,11 +54,14 @@ function useMovieReserveSeatsApi() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
-  const apiCall = (reservation) => {
+  const apiCall = (reservation, callback) => {
     setLoading(true);
     moviesApiAdapter
       .reserveSeats(reservation)
-      .then(setResponse)
+      .then((res) => {
+        setResponse(res);
+        if (callback) callback();
+      })
       .catch(setError)
       .finally(() => setLoading(false));
   };

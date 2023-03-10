@@ -71,15 +71,16 @@ export default function Seats() {
 
     const ids = selectedSeats.map((seat) => seat.id);
     const reservation = { ids, clientName, cpf };
-    reserveSeats(reservation);
-    navigator(ROUTES.success, {
-      state: {
-        seats: selectedSeats,
-        reservation,
-        movie,
-        day,
-        time: name,
-      },
+    reserveSeats(reservation, () => {
+      navigator(ROUTES.success, {
+        state: {
+          seats: selectedSeats,
+          reservation,
+          movie,
+          day,
+          time: name,
+        },
+      });
     });
   }
 
