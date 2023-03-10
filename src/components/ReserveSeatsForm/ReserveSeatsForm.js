@@ -1,4 +1,5 @@
-import { CustomInput, PrimaryButton, CustomForm } from "../../styled";
+import { PrimaryButton, CustomForm } from "../../styled";
+import InputGroup from "../InputGroup";
 
 export default function ReserveSeatsForm({
   handleFormSubmit,
@@ -14,28 +15,24 @@ export default function ReserveSeatsForm({
 
   return (
     <CustomForm onSubmit={onSubmit}>
-      <label>
-        Nome do comprador:
-        <CustomInput
-          placeholder="Digite seu nome..."
-          name="name"
-          type="text"
-          data-test="client-name"
-          value={valueName}
-          onChange={(e) => onChangeName(e.target.value)}
-        />
-      </label>
-      <label>
-        CPF do comprador:
-        <CustomInput
-          placeholder="Digite seu CPF..."
-          name="cpf"
-          type="text"
-          data-test="client-cpf"
-          value={valueCpf}
-          onChange={(e) => onChangeCpf(e.target.value)}
-        />
-      </label>
+      <InputGroup
+        title="Nome do comprador: "
+        placeholder="Digite seu nome..."
+        name="name"
+        type="text"
+        dataTest="client-name"
+        value={valueName}
+        onChange={onChangeName}
+      />
+      <InputGroup
+        title="CPF do comprador:"
+        placeholder="Digite seu CPF..."
+        name="cpf"
+        type="text"
+        dataTest="client-cpf"
+        value={valueCpf}
+        onChange={onChangeCpf}
+      />
       <PrimaryButton data-test="book-seat-btn" type="submit">
         Reservar assento(s)
       </PrimaryButton>
